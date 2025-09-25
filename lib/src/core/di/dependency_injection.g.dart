@@ -59,6 +59,24 @@ final authenticationRepositoryProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef AuthenticationRepositoryRef = ProviderRef<AuthenticationRepository>;
+String _$categoryRepositoryHash() =>
+    r'5d2e11769582ac5b83ce1101d195af86d9658403';
+
+/// See also [categoryRepository].
+@ProviderFor(categoryRepository)
+final categoryRepositoryProvider = Provider<CategoryRepository>.internal(
+  categoryRepository,
+  name: r'categoryRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$categoryRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef CategoryRepositoryRef = ProviderRef<CategoryRepository>;
 String _$routerRepositoryHash() => r'277e8ef0a2084e2932037d567391fefea47aaaf9';
 
 /// See also [routerRepository].
@@ -161,6 +179,125 @@ final registerUseCaseProvider = AutoDisposeProvider<RegisterUseCase>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef RegisterUseCaseRef = AutoDisposeProviderRef<RegisterUseCase>;
+String _$getCategoriesUseCaseHash() =>
+    r'31a639bec1a6f9b7d4b8caf5fca4d645328db921';
+
+/// See also [getCategoriesUseCase].
+@ProviderFor(getCategoriesUseCase)
+final getCategoriesUseCaseProvider =
+    AutoDisposeProvider<GetCategoriesUseCase>.internal(
+      getCategoriesUseCase,
+      name: r'getCategoriesUseCaseProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$getCategoriesUseCaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef GetCategoriesUseCaseRef = AutoDisposeProviderRef<GetCategoriesUseCase>;
+String _$createCategoryUseCaseHash() =>
+    r'2c41cb3f4036f505731932e382777c1fe1448816';
+
+/// See also [createCategoryUseCase].
+@ProviderFor(createCategoryUseCase)
+final createCategoryUseCaseProvider =
+    AutoDisposeProvider<CreateCategoryUseCase>.internal(
+      createCategoryUseCase,
+      name: r'createCategoryUseCaseProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$createCategoryUseCaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef CreateCategoryUseCaseRef =
+    AutoDisposeProviderRef<CreateCategoryUseCase>;
+String _$updateCategoryUseCaseHash() =>
+    r'bd85232b133e48425bb2ce6d7f155cc772f1361f';
+
+/// See also [updateCategoryUseCase].
+@ProviderFor(updateCategoryUseCase)
+final updateCategoryUseCaseProvider =
+    AutoDisposeProvider<UpdateCategoryUseCase>.internal(
+      updateCategoryUseCase,
+      name: r'updateCategoryUseCaseProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$updateCategoryUseCaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef UpdateCategoryUseCaseRef =
+    AutoDisposeProviderRef<UpdateCategoryUseCase>;
+String _$deleteCategoryUseCaseHash() =>
+    r'145474cdbb9e78e4d5fad160f243b1eecdd9541e';
+
+/// See also [deleteCategoryUseCase].
+@ProviderFor(deleteCategoryUseCase)
+final deleteCategoryUseCaseProvider =
+    AutoDisposeProvider<DeleteCategoryUseCase>.internal(
+      deleteCategoryUseCase,
+      name: r'deleteCategoryUseCaseProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$deleteCategoryUseCaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef DeleteCategoryUseCaseRef =
+    AutoDisposeProviderRef<DeleteCategoryUseCase>;
+String _$backupCategoriesUseCaseHash() =>
+    r'19c97805ac4cba323cb24bb2b2c358bb3fa5cdf8';
+
+/// See also [backupCategoriesUseCase].
+@ProviderFor(backupCategoriesUseCase)
+final backupCategoriesUseCaseProvider =
+    AutoDisposeProvider<BackupCategoriesUseCase>.internal(
+      backupCategoriesUseCase,
+      name: r'backupCategoriesUseCaseProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$backupCategoriesUseCaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef BackupCategoriesUseCaseRef =
+    AutoDisposeProviderRef<BackupCategoriesUseCase>;
+String _$restoreCategoriesUseCaseHash() =>
+    r'b28ae6a396a3b67ffab489addeb9b211cd72941f';
+
+/// See also [restoreCategoriesUseCase].
+@ProviderFor(restoreCategoriesUseCase)
+final restoreCategoriesUseCaseProvider =
+    AutoDisposeProvider<RestoreCategoriesUseCase>.internal(
+      restoreCategoriesUseCase,
+      name: r'restoreCategoriesUseCaseProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$restoreCategoriesUseCaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef RestoreCategoriesUseCaseRef =
+    AutoDisposeProviderRef<RestoreCategoriesUseCase>;
 String _$loginUseCaseHash() => r'b98519882aa37b0342393373924de47321902097';
 
 /// See also [loginUseCase].

@@ -468,3 +468,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **Happy coding!** 🎉 If you found this template helpful, please consider giving it a star ⭐️ 
+
+## Expense Categories Management
+
+- View/add/edit/delete categories
+- Preloaded defaults: Food, Transport, Entertainment, Health, Shopping
+- Custom icon and color selection (dropdown)
+- Local persistence with Sqflite
+- Backup/restore to JSON file (offline sync simulation) via Category screen

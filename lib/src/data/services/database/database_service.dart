@@ -9,6 +9,12 @@ abstract class DatabaseService {
   // User APIs
   Future<int> insertUser(Map<String, Object?> data);
   Future<Map<String, Object?>?> findUserByEmail(String email);
+
+  // Category APIs
+  Future<int> insertCategory(Map<String, Object?> data);
+  Future<int> updateCategory(Map<String, Object?> data);
+  Future<int> deleteCategory(int id);
+  Future<List<Map<String, Object?>>> getAllCategories();
 }
 
 

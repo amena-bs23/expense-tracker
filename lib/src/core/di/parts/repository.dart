@@ -9,6 +9,11 @@ AuthenticationRepository authenticationRepository(Ref ref) {
 }
 
 @Riverpod(keepAlive: true)
+CategoryRepository categoryRepository(Ref ref) {
+  return CategoryRepositoryImpl(ref.read(databaseServiceProvider));
+}
+
+@Riverpod(keepAlive: true)
 RouterRepository routerRepository(Ref ref) {
   return RouterRepositoryImpl(cacheService: ref.read(cacheServiceProvider));
 }

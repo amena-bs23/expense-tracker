@@ -6,6 +6,36 @@ RegisterUseCase registerUseCase(Ref ref) {
 }
 
 @riverpod
+GetCategoriesUseCase getCategoriesUseCase(Ref ref) {
+  return GetCategoriesUseCase(ref.read(categoryRepositoryProvider));
+}
+
+@riverpod
+CreateCategoryUseCase createCategoryUseCase(Ref ref) {
+  return CreateCategoryUseCase(ref.read(categoryRepositoryProvider));
+}
+
+@riverpod
+UpdateCategoryUseCase updateCategoryUseCase(Ref ref) {
+  return UpdateCategoryUseCase(ref.read(categoryRepositoryProvider));
+}
+
+@riverpod
+DeleteCategoryUseCase deleteCategoryUseCase(Ref ref) {
+  return DeleteCategoryUseCase(ref.read(categoryRepositoryProvider));
+}
+
+@riverpod
+BackupCategoriesUseCase backupCategoriesUseCase(Ref ref) {
+  return BackupCategoriesUseCase(ref.read(categoryRepositoryProvider));
+}
+
+@riverpod
+RestoreCategoriesUseCase restoreCategoriesUseCase(Ref ref) {
+  return RestoreCategoriesUseCase(ref.read(categoryRepositoryProvider));
+}
+
+@riverpod
 LoginUseCase loginUseCase(Ref ref) {
   return LoginUseCase(ref.read(authenticationRepositoryProvider));
 }
