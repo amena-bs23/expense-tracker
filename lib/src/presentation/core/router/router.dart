@@ -11,8 +11,7 @@ import '../../features/authentication/forgot_password/view/reset_password_page.d
 import '../../features/authentication/forgot_password/view/reset_password_success_page.dart';
 import '../../features/authentication/login/view/login_page.dart';
 import '../../features/authentication/registration/view/registration_page.dart';
-import '../../features/home/view/home_page.dart';
-import '../../features/profile/view/profile_page.dart';
+// Removed unused home/profile pages in shell
 import '../../features/category/view/category_list_page.dart';
 import '../../features/expense/expense_list/view/expense_list_page.dart';
 import '../../features/analytics/view/analytics_page.dart';
@@ -24,7 +23,6 @@ import 'router_state/router_state_provider.dart';
 import 'routes.dart';
 
 part 'parts/authentication_routes.dart';
-part 'parts/category_routes.dart';
 part 'parts/shell_routes.dart';
 part 'router.g.dart';
 
@@ -58,7 +56,7 @@ GoRouter goRouter(Ref ref) {
         },
       ),
       ..._authenticationRoutes(ref),
-      ..._categoryRoutes(ref),
+      // Category route is handled inside the shell branches
       _shellRoutes(ref),
     ],
   );

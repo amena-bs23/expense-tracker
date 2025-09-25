@@ -1,13 +1,3 @@
 part of '../router.dart';
-
-List<GoRoute> _categoryRoutes(ref) {
-  return [
-    GoRoute(
-      path: Routes.category,
-      name: Routes.category,
-      pageBuilder: (context, state) {
-        return const MaterialPage(child: CategoryListPage());
-      },
-    ),
-  ];
-}
+// Category routes moved into shell; keeping empty stub for backward compatibility.
+List _categoryRoutes(ref) => const [];

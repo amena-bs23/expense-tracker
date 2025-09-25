@@ -11,7 +11,7 @@ class AnalyticsRepositoryImpl implements AnalyticsRepository {
   @override
   Future<double> totalForRange({required int fromMs, required int toMs}) async {
     final rows = await _db.getExpenses(dateFromMs: fromMs, dateToMs: toMs);
-    return rows.map(ExpenseModel.fromDb).fold(0.0, (s, e) => s + e.amount);
+    return rows.map(ExpenseModel.fromDb).fold<double>(0.0, (s, e) => s + e.amount);
   }
 
   @override
@@ -54,10 +54,12 @@ class AnalyticsRepositoryImpl implements AnalyticsRepository {
     final weekStart = now.subtract(Duration(days: now.weekday - 1));
     final rows = await _db.getExpenses(dateFromMs: monthStart.millisecondsSinceEpoch, dateToMs: now.millisecondsSinceEpoch);
     final list = rows.map(ExpenseModel.fromDb).toList();
-    final total = list.fold(0.0, (s, e) => s + e.amount);
+    final total = list.fold<double>(0.0, (s, e) => s + e.amount);
     final daysElapsed = now.difference(monthStart).inDays + 1;
     final dailyAvg = daysElapsed > 0 ? total / daysElapsed : 0.0;
-    final weekTotal = list.where((e) => e.dateMs >= weekStart.millisecondsSinceEpoch).fold(0.0, (s, e) => s + e.amount);
+    final weekTotal = list
+        .where((e) => e.dateMs >= weekStart.millisecondsSinceEpoch)
+        .fold<double>(0.0, (s, e) => s + e.amount);
     final weeklyAvg = weekTotal; // per week
     final monthlyAvg = total; // per month
     return (daily: dailyAvg, weekly: weeklyAvg, monthly: monthlyAvg);

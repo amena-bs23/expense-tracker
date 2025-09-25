@@ -120,6 +120,7 @@ class AnalyticsPage extends ConsumerWidget {
           final value = entry.value;
           final total = state.breakdown.values.fold(0.0, (s, v) => s + v);
           final percent = (value / total) * 100;
+          if (!context.mounted) return;
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Category ${entry.key}: ${value.toStringAsFixed(2)} (${percent.toStringAsFixed(1)}%)')),
           );
@@ -145,6 +146,7 @@ class AnalyticsPage extends ConsumerWidget {
           final s = resp.lineBarSpots!.first;
           final dayMs = state.trends.first.key + (s.x * 86400000).toInt();
           final date = DateTime.fromMillisecondsSinceEpoch(dayMs);
+          if (!context.mounted) return;
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('${date.toLocal().toString().split(' ').first}: ${s.y.toStringAsFixed(2)}')),
           );

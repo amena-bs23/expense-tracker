@@ -65,7 +65,12 @@ class _AddExpensePageState extends ConsumerState<AddExpensePage> {
             ),
             const SizedBox(height: 8),
             DropdownButton<int>(
-              value: selectedCategory.value,
+              value: {
+                final ids = {for (final c in categories) c.id!};
+                return ids.contains(selectedCategory.value)
+                    ? selectedCategory.value
+                    : (ids.isNotEmpty ? ids.first : null);
+              }(),
               items: [
                 for (final c in categories)
                   DropdownMenuItem(value: c.id, child: Text(c.name)),

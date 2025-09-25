@@ -15,6 +15,13 @@ Future<void> showCategoryDialog(
   final name = TextEditingController(text: data?.name ?? '');
   final icon = ValueNotifier<String>(data?.icon ?? 'category');
   final color = ValueNotifier<int>(data?.color ?? 0xFF90CAF9);
+  const palette = <int>{
+    0xFF90CAF9,
+    0xFFFFAB91,
+    0xFFCE93D8,
+    0xFFA5D6A7,
+    0xFFFFE082,
+  };
 
   await showDialog(
     context: context,
@@ -49,7 +56,9 @@ Future<void> showCategoryDialog(
           ),
           const SizedBox(height: 8),
           DropdownButton<int>(
-            value: color.value,
+            value: palette.contains(color.value) ? color.value : palette.first,
+
+
             items: const [
               DropdownMenuItem(value: 0xFF90CAF9, child: Text('Blue')),
               DropdownMenuItem(value: 0xFFFFAB91, child: Text('Deep Orange')),

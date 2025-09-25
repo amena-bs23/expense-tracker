@@ -82,7 +82,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 ref.listen(registrationProvider, (prev, next) {
                   if (next.status.isSuccess) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Success')),
+                      const SnackBar(
+                        content: Text('Registration successful'),
+                        behavior: SnackBarBehavior.floating,
+                        duration: Duration(seconds: 2),
+                      ),
                     );
                     context.pushNamedAndRemoveUntil(Routes.login);
                   }
