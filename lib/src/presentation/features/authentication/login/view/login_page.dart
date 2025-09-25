@@ -43,15 +43,17 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     ref.listenManual(loginProvider, (previous, next) {
       if (next.status.isSuccess) {
         notifier.saveRememberMe(shouldRemember.value);
+        if (!mounted) return;
         context.pushReplacementNamed(Routes.category);
       } else {
         shouldRemember.value = next.rememberMe;
       }
 
       if (next.status.isError) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(next.error!)));
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(next.error!)),
+        );
       }
     });
   }

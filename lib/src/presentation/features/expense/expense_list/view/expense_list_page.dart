@@ -243,13 +243,12 @@ class _ExpenseListPageState extends ConsumerState<ExpenseListPage> {
                 ),
               ),
             ),
-            FilledButton(
+            FilledButton.icon(
               onPressed: () {
-                ref.read(logoutProvider.notifier).call();
+                context.pushNamed(Routes.addNewExpense);
               },
-              child: state.isLoading
-                  ? const LoadingIndicator()
-                  : Text(context.locale.logout),
+              icon: const Icon(Icons.add),
+              label: const Text('Add Expense'),
             ),
           ],
         ),

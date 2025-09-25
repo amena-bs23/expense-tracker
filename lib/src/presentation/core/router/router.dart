@@ -15,6 +15,7 @@ import '../../features/authentication/registration/view/registration_page.dart';
 import '../../features/category/view/category_list_page.dart';
 import '../../features/expense/expense_list/view/expense_list_page.dart';
 import '../../features/analytics/view/analytics_page.dart';
+import '../../features/expense/add_expense/view/add_expense_page.dart';
 
 import '../../features/splash/view/splash_page.dart';
 import '../widgets/app_startup/startup_widget.dart';
@@ -54,6 +55,11 @@ GoRouter goRouter(Ref ref) {
             ),
           );
         },
+      ),
+      GoRoute(
+        path: Routes.addNewExpense,
+        name: Routes.addNewExpense,
+        pageBuilder: (context, state) => const MaterialPage(child: AddExpensePage()),
       ),
       ..._authenticationRoutes(ref),
       // Category route is handled inside the shell branches

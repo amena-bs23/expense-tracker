@@ -41,12 +41,13 @@ class _AddExpensePageState extends ConsumerState<AddExpensePage> {
     final selectedDate = ValueNotifier<DateTime>(DateTime.now());
 
     return Scaffold(
-      body: Padding(
+      appBar: AppBar(title: const Text('Add Expense')),
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(context.locale.home),
+            Text('Create a new expense', style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: 16),
             TextFormField(
               controller: amountCtrl,
@@ -65,12 +66,12 @@ class _AddExpensePageState extends ConsumerState<AddExpensePage> {
             ),
             const SizedBox(height: 8),
             DropdownButton<int>(
-              value: {
+              value: (() {
                 final ids = {for (final c in categories) c.id!};
                 return ids.contains(selectedCategory.value)
                     ? selectedCategory.value
                     : (ids.isNotEmpty ? ids.first : null);
-              }(),
+              })(),
               items: [
                 for (final c in categories)
                   DropdownMenuItem(value: c.id, child: Text(c.name)),
@@ -100,48 +101,56 @@ class _AddExpensePageState extends ConsumerState<AddExpensePage> {
             Consumer(builder: (context, ref, _) {
               final expState = ref.watch(expenseProvider);
               final loading = expState.status.isLoading;
-              return FilledButton(
-                onPressed: loading
-                    ? null
-                    : () async {
-                        final amount = double.tryParse(amountCtrl.text) ?? -1;
-                        if (amount <= 0 || descCtrl.text.trim().isEmpty || selectedCategory.value == null) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Please fill all fields with valid values')),
-                          );
-                          return;
-                        }
-                        await ref.read(expenseProvider.notifier).add(
-                              ExpenseEntity(
-                                amount: amount,
-                                description: descCtrl.text.trim(),
-                                categoryId: selectedCategory.value!,
-                                dateMs: DateTime(
-                                  selectedDate.value.year,
-                                  selectedDate.value.month,
-                                  selectedDate.value.day,
-                                ).millisecondsSinceEpoch,
-                              ),
-                            );
-                        if (context.mounted) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Expense added')),
-                          );
-                        }
-                      },
-                child: loading
-                    ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2))
-                    : const Text('Add Expense'),
+              return Row(
+                children: [
+                  Expanded(
+                    child: FilledButton.icon(
+                      onPressed: loading
+                          ? null
+                          : () async {
+                              final amount = double.tryParse(amountCtrl.text) ?? -1;
+                              if (amount <= 0 || descCtrl.text.trim().isEmpty || selectedCategory.value == null) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text('Please fill all fields with valid values')),
+                                );
+                                return;
+                              }
+                              await ref.read(expenseProvider.notifier).add(
+                                    ExpenseEntity(
+                                      amount: amount,
+                                      description: descCtrl.text.trim(),
+                                      categoryId: selectedCategory.value!,
+                                      dateMs: DateTime(
+                                        selectedDate.value.year,
+                                        selectedDate.value.month,
+                                        selectedDate.value.day,
+                                      ).millisecondsSinceEpoch,
+                                    ),
+                                  );
+                              if (context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text('Expense added')),
+                                );
+                                Navigator.pop(context);
+                              }
+                            },
+                      icon: loading
+                          ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2))
+                          : const Icon(Icons.check),
+                      label: const Text('Save'),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      onPressed: () => Navigator.pop(context),
+                      icon: const Icon(Icons.close),
+                      label: const Text('Cancel'),
+                    ),
+                  ),
+                ],
               );
             }),
-            FilledButton(
-              onPressed: () {
-                ref.read(logoutProvider.notifier).call();
-              },
-              child: state.isLoading
-                  ? const LoadingIndicator()
-                  : Text(context.locale.logout),
-            ),
           ],
         ),
       ),
