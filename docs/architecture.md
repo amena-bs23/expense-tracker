@@ -1,6 +1,6 @@
 # Flutter Template Architecture
 
-This document outlines the architecture of the Flutter Template project, explaining the file structure, component responsibilities, and how different layers interact with each other.
+This document outlines the architecture of the Expense Tracker project, explaining the file structure, component responsibilities, and how different layers interact with each other.
 
 ## Project Structure
 
