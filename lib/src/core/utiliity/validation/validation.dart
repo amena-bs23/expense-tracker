@@ -5,6 +5,7 @@ export 'length_validation.dart';
 export 'password_validation.dart';
 export 'required_validation.dart';
 export 'validation_impl.dart';
+export 'positive_number_validation.dart';
 
 abstract class Validation<T> {
   const Validation();

@@ -10,6 +10,9 @@ import '../../../category/riverpod/category_provider.dart';
 import '../../riverpod/expense_provider.dart';
 import '../../../../../../src/domain/entities/expense_entity.dart';
 import '../../../../core/base/status.dart';
+import '../../../../../core/extensions/validation.dart';
+import '../../../../../core/utiliity/validation/validation.dart';
+import '../../../../../core/utiliity/validation/positive_number_validation.dart';
 
 class AddExpensePage extends ConsumerStatefulWidget {
   const AddExpensePage({super.key});
@@ -45,15 +48,20 @@ class _AddExpensePageState extends ConsumerState<AddExpensePage> {
           children: [
             Text(context.locale.home),
             const SizedBox(height: 16),
-            TextField(
+            TextFormField(
               controller: amountCtrl,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(labelText: 'Amount'),
+              validator: (v) => context.validator.apply<num>([
+                RequiredValidation(),
+                PositiveNumberValidation(),
+              ])(double.tryParse(v ?? '')),
             ),
             const SizedBox(height: 8),
-            TextField(
+            TextFormField(
               controller: descCtrl,
               decoration: const InputDecoration(labelText: 'Description'),
+              validator: context.validator.apply([RequiredValidation()]),
             ),
             const SizedBox(height: 8),
             DropdownButton<int>(

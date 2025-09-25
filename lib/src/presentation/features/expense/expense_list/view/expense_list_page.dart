@@ -7,6 +7,7 @@ import '../../../../core/application_state/logout_provider/logout_provider.dart'
 import '../../../../core/router/routes.dart';
 import '../../../../core/widgets/loading_indicator.dart';
 import '../../riverpod/expense_provider.dart';
+import '../../../../../domain/entities/expense_entity.dart';
 import '../../../category/riverpod/category_provider.dart';
 
 class ExpenseListPage extends ConsumerStatefulWidget {
@@ -161,7 +162,73 @@ class _ExpenseListPageState extends ConsumerState<ExpenseListPage> {
                         IconButton(
                           icon: const Icon(Icons.edit),
                           onPressed: () async {
-                            // Implement edit dialog/page as needed
+                            final amountCtrl = TextEditingController(text: e.amount.toStringAsFixed(2));
+                            final descCtrl = TextEditingController(text: e.description);
+                            int selectedCat = e.categoryId;
+                            final formKey = GlobalKey<FormState>();
+
+                            await showDialog(
+                              context: context,
+                              builder: (_) => AlertDialog(
+                                title: const Text('Edit Expense'),
+                                content: Form(
+                                  key: formKey,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      TextFormField(
+                                        controller: amountCtrl,
+                                        keyboardType: TextInputType.number,
+                                        decoration: const InputDecoration(labelText: 'Amount'),
+                                        validator: (v) {
+                                          final n = double.tryParse(v ?? '');
+                                          if (n == null) return 'This field is required';
+                                          if (n <= 0) return 'Value must be positive';
+                                          return null;
+                                        },
+                                      ),
+                                      const SizedBox(height: 8),
+                                      TextFormField(
+                                        controller: descCtrl,
+                                        decoration: const InputDecoration(labelText: 'Description'),
+                                        validator: (v) => (v == null || v.trim().isEmpty) ? 'This field is required' : null,
+                                      ),
+                                      const SizedBox(height: 8),
+                                      DropdownButton<int>(
+                                        value: selectedCat,
+                                        items: [
+                                          for (final c in cats.values)
+                                            DropdownMenuItem(value: c.id, child: Text(c.name)),
+                                        ],
+                                        onChanged: (v) => selectedCat = v!,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                actions: [
+                                  TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+                                  FilledButton(
+                                    onPressed: () async {
+                                      if (!formKey.currentState!.validate()) return;
+                                      await ref.read(expenseProvider.notifier).edit(
+                                        ExpenseEntity(
+                                          id: e.id,
+                                          amount: double.parse(amountCtrl.text),
+                                          description: descCtrl.text.trim(),
+                                          categoryId: selectedCat,
+                                          dateMs: e.dateMs,
+                                        ),
+                                      );
+                                      if (context.mounted) Navigator.pop(context);
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(content: Text('Expense updated')),
+                                      );
+                                    },
+                                    child: const Text('Save'),
+                                  ),
+                                ],
+                              ),
+                            );
                           },
                         ),
                         IconButton(
