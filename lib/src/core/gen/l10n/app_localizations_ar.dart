@@ -18,6 +18,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get login => 'تسجيل الدخول';
 
   @override
+  String get category => 'فئة';
+
+  @override
   String get createNewPassword => 'إنشاء كلمة مرور جديدة';
 
   @override

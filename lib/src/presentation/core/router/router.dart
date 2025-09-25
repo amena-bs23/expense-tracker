@@ -13,6 +13,8 @@ import '../../features/authentication/login/view/login_page.dart';
 import '../../features/authentication/registration/view/registration_page.dart';
 import '../../features/home/view/home_page.dart';
 import '../../features/profile/view/profile_page.dart';
+import '../../features/category/view/category_list_page.dart';
+
 import '../../features/splash/view/splash_page.dart';
 import '../widgets/app_startup/startup_widget.dart';
 import '../widgets/navigation_shell.dart';
@@ -20,6 +22,7 @@ import 'router_state/router_state_provider.dart';
 import 'routes.dart';
 
 part 'parts/authentication_routes.dart';
+part 'parts/category_routes.dart';
 part 'parts/shell_routes.dart';
 part 'router.g.dart';
 
@@ -34,10 +37,7 @@ GoRouter goRouter(Ref ref) {
     initialLocation: Routes.initial,
     redirect: (context, state) {
       Log.info('Redirecting to ${state.uri}');
-      if ([
-        Routes.initial,
-        Routes.splash,
-      ].contains(state.uri.path)) {
+      if ([Routes.initial, Routes.splash].contains(state.uri.path)) {
         return ref.asListenable(routerStateProvider).value;
       }
       return null;
@@ -56,6 +56,7 @@ GoRouter goRouter(Ref ref) {
         },
       ),
       ..._authenticationRoutes(ref),
+      ..._categoryRoutes(ref),
       _shellRoutes(ref),
     ],
   );

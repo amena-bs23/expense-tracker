@@ -429,6 +429,13 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Password must contain at least one special character'**
   String get passwordSpecialCharValidation;
+
+  /// No description provided for @passwordSpecialCharValidation.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must contain at least one special character'**
+  String get category;
+
 }
 
 class _AppLocalizationsDelegate
