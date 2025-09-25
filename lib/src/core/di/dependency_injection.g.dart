@@ -94,6 +94,24 @@ final expenseRepositoryProvider = Provider<ExpenseRepository>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef ExpenseRepositoryRef = ProviderRef<ExpenseRepository>;
+String _$analyticsRepositoryHash() =>
+    r'2433d5e62ae537ea7e763a1bab9fb4cb768ad061';
+
+/// See also [analyticsRepository].
+@ProviderFor(analyticsRepository)
+final analyticsRepositoryProvider = Provider<AnalyticsRepository>.internal(
+  analyticsRepository,
+  name: r'analyticsRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$analyticsRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef AnalyticsRepositoryRef = ProviderRef<AnalyticsRepository>;
 String _$routerRepositoryHash() => r'277e8ef0a2084e2932037d567391fefea47aaaf9';
 
 /// See also [routerRepository].
@@ -450,6 +468,101 @@ final getFilteredExpensesUseCaseProvider =
 // ignore: unused_element
 typedef GetFilteredExpensesUseCaseRef =
     AutoDisposeProviderRef<GetFilteredExpensesUseCase>;
+String _$getTotalsUseCaseHash() => r'df7345c5b9c27d2b8fa3b7f8a692a4ff9536944c';
+
+/// See also [getTotalsUseCase].
+@ProviderFor(getTotalsUseCase)
+final getTotalsUseCaseProvider = AutoDisposeProvider<GetTotalsUseCase>.internal(
+  getTotalsUseCase,
+  name: r'getTotalsUseCaseProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$getTotalsUseCaseHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef GetTotalsUseCaseRef = AutoDisposeProviderRef<GetTotalsUseCase>;
+String _$getBreakdownUseCaseHash() =>
+    r'aa7efd180635473fe34e4211036036904536c900';
+
+/// See also [getBreakdownUseCase].
+@ProviderFor(getBreakdownUseCase)
+final getBreakdownUseCaseProvider =
+    AutoDisposeProvider<GetBreakdownUseCase>.internal(
+      getBreakdownUseCase,
+      name: r'getBreakdownUseCaseProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$getBreakdownUseCaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef GetBreakdownUseCaseRef = AutoDisposeProviderRef<GetBreakdownUseCase>;
+String _$getTopCategoriesUseCaseHash() =>
+    r'a545330eba7dad91ff51e17bfe9e045471c64506';
+
+/// See also [getTopCategoriesUseCase].
+@ProviderFor(getTopCategoriesUseCase)
+final getTopCategoriesUseCaseProvider =
+    AutoDisposeProvider<GetTopCategoriesUseCase>.internal(
+      getTopCategoriesUseCase,
+      name: r'getTopCategoriesUseCaseProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$getTopCategoriesUseCaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef GetTopCategoriesUseCaseRef =
+    AutoDisposeProviderRef<GetTopCategoriesUseCase>;
+String _$getDailyTrendsUseCaseHash() =>
+    r'3ba91ad76069591094fd726c78a67650b0ddcdf0';
+
+/// See also [getDailyTrendsUseCase].
+@ProviderFor(getDailyTrendsUseCase)
+final getDailyTrendsUseCaseProvider =
+    AutoDisposeProvider<GetDailyTrendsUseCase>.internal(
+      getDailyTrendsUseCase,
+      name: r'getDailyTrendsUseCaseProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$getDailyTrendsUseCaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef GetDailyTrendsUseCaseRef =
+    AutoDisposeProviderRef<GetDailyTrendsUseCase>;
+String _$getAveragesUseCaseHash() =>
+    r'52e6e9db3001b218ec6c840dade786ab76f60aea';
+
+/// See also [getAveragesUseCase].
+@ProviderFor(getAveragesUseCase)
+final getAveragesUseCaseProvider =
+    AutoDisposeProvider<GetAveragesUseCase>.internal(
+      getAveragesUseCase,
+      name: r'getAveragesUseCaseProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$getAveragesUseCaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef GetAveragesUseCaseRef = AutoDisposeProviderRef<GetAveragesUseCase>;
 String _$loginUseCaseHash() => r'b98519882aa37b0342393373924de47321902097';
 
 /// See also [loginUseCase].

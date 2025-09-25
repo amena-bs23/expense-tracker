@@ -14,6 +14,8 @@ import '../../features/authentication/registration/view/registration_page.dart';
 import '../../features/home/view/home_page.dart';
 import '../../features/profile/view/profile_page.dart';
 import '../../features/category/view/category_list_page.dart';
+import '../../features/expense/expense_list/view/expense_list_page.dart';
+import '../../features/analytics/view/analytics_page.dart';
 
 import '../../features/splash/view/splash_page.dart';
 import '../widgets/app_startup/startup_widget.dart';

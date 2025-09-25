@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/extensions/app_localization.dart';
 
 class NavigationShell extends StatefulWidget {
   const NavigationShell({super.key, required this.statefulNavigationShell});
@@ -16,22 +15,28 @@ class _NavigationShellState extends State<NavigationShell> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Expense Tracker')),
+      appBar: AppBar(
+        title: const Text('Expense Tracker'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () {
+              context.go('/login');
+            },
+            tooltip: 'Logout',
+          ),
+        ],
+      ),
       body: widget.statefulNavigationShell,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: widget.statefulNavigationShell.currentIndex,
         onTap: (index) {
           widget.statefulNavigationShell.goBranch(index);
         },
-        items: [
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.home),
-            label: context.locale.home,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.person),
-            label: context.locale.profile,
-          ),
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.category), label: 'Category'),
+          BottomNavigationBarItem(icon: Icon(Icons.list_alt), label: 'Expense'),
+          BottomNavigationBarItem(icon: Icon(Icons.analytics), label: 'Analytics'),
         ],
       ),
     );

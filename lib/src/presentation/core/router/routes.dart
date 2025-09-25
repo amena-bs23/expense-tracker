@@ -14,4 +14,5 @@ class Routes {
   static const String category = '/category';
   static const String expenseList = '/expense-list';
   static const String addNewExpense = '/add-new-expense';
+  static const String analytics = '/analytics';
 }

@@ -71,6 +71,31 @@ GetFilteredExpensesUseCase getFilteredExpensesUseCase(Ref ref) {
 }
 
 @riverpod
+GetTotalsUseCase getTotalsUseCase(Ref ref) {
+  return GetTotalsUseCase(ref.read(analyticsRepositoryProvider));
+}
+
+@riverpod
+GetBreakdownUseCase getBreakdownUseCase(Ref ref) {
+  return GetBreakdownUseCase(ref.read(analyticsRepositoryProvider));
+}
+
+@riverpod
+GetTopCategoriesUseCase getTopCategoriesUseCase(Ref ref) {
+  return GetTopCategoriesUseCase(ref.read(analyticsRepositoryProvider));
+}
+
+@riverpod
+GetDailyTrendsUseCase getDailyTrendsUseCase(Ref ref) {
+  return GetDailyTrendsUseCase(ref.read(analyticsRepositoryProvider));
+}
+
+@riverpod
+GetAveragesUseCase getAveragesUseCase(Ref ref) {
+  return GetAveragesUseCase(ref.read(analyticsRepositoryProvider));
+}
+
+@riverpod
 LoginUseCase loginUseCase(Ref ref) {
   return LoginUseCase(ref.read(authenticationRepositoryProvider));
 }
