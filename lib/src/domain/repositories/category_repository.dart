@@ -11,7 +11,3 @@ abstract base class CategoryRepository extends Repository {
   Future<List<CategoryEntity>> backup();
   Future<void> restore(List<CategoryEntity> items);
 }
-
-
-
-

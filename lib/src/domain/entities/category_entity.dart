@@ -11,7 +11,3 @@ class CategoryEntity {
   final String icon; // material icon name string
   final int color; // ARGB hex int
 }
-
-
-
-

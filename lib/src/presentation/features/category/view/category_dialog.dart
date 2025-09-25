@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/extensions/validation.dart';
+import '../../../../core/utiliity/validation/validation.dart';
 import '../../../../domain/entities/category_entity.dart';
+import '../../../core/widgets/validated_text_field.dart';
 import '../riverpod/category_provider.dart';
 
-Future<void> showCategoryDialog(BuildContext context, WidgetRef ref, CategoryEntity? data) async {
+Future<void> showCategoryDialog(
+  BuildContext context,
+  WidgetRef ref,
+  CategoryEntity? data,
+) async {
   final name = TextEditingController(text: data?.name ?? '');
   final icon = ValueNotifier<String>(data?.icon ?? 'category');
   final color = ValueNotifier<int>(data?.color ?? 0xFF90CAF9);
@@ -16,16 +23,26 @@ Future<void> showCategoryDialog(BuildContext context, WidgetRef ref, CategoryEnt
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          TextField(controller: name, decoration: const InputDecoration(labelText: 'Name')),
+          ValidatedTextField(
+            controller: name,
+            label: 'Name',
+            validator: context.validator.apply([RequiredValidation()]),
+          ),
           const SizedBox(height: 8),
           DropdownButton<String>(
             value: icon.value,
             items: const [
               DropdownMenuItem(value: 'category', child: Text('Category')),
               DropdownMenuItem(value: 'restaurant', child: Text('Food')),
-              DropdownMenuItem(value: 'directions_bus', child: Text('Transport')),
+              DropdownMenuItem(
+                value: 'directions_bus',
+                child: Text('Transport'),
+              ),
               DropdownMenuItem(value: 'movie', child: Text('Entertainment')),
-              DropdownMenuItem(value: 'health_and_safety', child: Text('Health')),
+              DropdownMenuItem(
+                value: 'health_and_safety',
+                child: Text('Health'),
+              ),
               DropdownMenuItem(value: 'shopping_bag', child: Text('Shopping')),
             ],
             onChanged: (v) => icon.value = v!,
@@ -45,7 +62,10 @@ Future<void> showCategoryDialog(BuildContext context, WidgetRef ref, CategoryEnt
         ],
       ),
       actions: [
-        TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text('Cancel'),
+        ),
         FilledButton(
           onPressed: () async {
             final entity = CategoryEntity(
@@ -67,7 +87,3 @@ Future<void> showCategoryDialog(BuildContext context, WidgetRef ref, CategoryEnt
     ),
   );
 }
-
-
-
-
