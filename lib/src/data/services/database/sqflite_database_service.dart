@@ -124,6 +124,17 @@ class SqfliteDatabaseService implements DatabaseService {
   }
 
   @override
+  Future<int> updateExpense(Map<String, Object?> data) {
+    return db.update(
+      tableExpenses,
+      data,
+      where: 'id = ?',
+      whereArgs: [data['id']],
+      conflictAlgorithm: ConflictAlgorithm.abort,
+    );
+  }
+
+  @override
   Future<int> deleteExpense(int id) {
     return db.delete(tableExpenses, where: 'id = ?', whereArgs: [id]);
   }
@@ -131,6 +142,44 @@ class SqfliteDatabaseService implements DatabaseService {
   @override
   Future<List<Map<String, Object?>>> getAllExpenses() async {
     return db.query(tableExpenses, orderBy: 'date_ms DESC');
+  }
+
+  @override
+  Future<List<Map<String, Object?>>> getExpenses({
+    int? limit,
+    int? offset,
+    int? categoryId,
+    int? dateFromMs,
+    int? dateToMs,
+    String? search,
+  }) async {
+    final where = <String>[];
+    final whereArgs = <Object?>[];
+    if (categoryId != null) {
+      where.add('category_id = ?');
+      whereArgs.add(categoryId);
+    }
+    if (dateFromMs != null) {
+      where.add('date_ms >= ?');
+      whereArgs.add(dateFromMs);
+    }
+    if (dateToMs != null) {
+      where.add('date_ms <= ?');
+      whereArgs.add(dateToMs);
+    }
+    if (search != null && search.trim().isNotEmpty) {
+      where.add('description LIKE ?');
+      whereArgs.add('%${search.trim()}%');
+    }
+
+    return db.query(
+      tableExpenses,
+      where: where.isEmpty ? null : where.join(' AND '),
+      whereArgs: whereArgs.isEmpty ? null : whereArgs,
+      orderBy: 'date_ms DESC',
+      limit: limit,
+      offset: offset,
+    );
   }
 }
 

@@ -15,6 +15,25 @@ final class ExpenseRepositoryImpl extends ExpenseRepository {
     return rows.map(ExpenseModel.fromDb).toList();
   }
 
+  Future<List<ExpenseEntity>> getFiltered({
+    int? limit,
+    int? offset,
+    int? categoryId,
+    int? dateFromMs,
+    int? dateToMs,
+    String? search,
+  }) async {
+    final rows = await _db.getExpenses(
+      limit: limit,
+      offset: offset,
+      categoryId: categoryId,
+      dateFromMs: dateFromMs,
+      dateToMs: dateToMs,
+      search: search,
+    );
+    return rows.map(ExpenseModel.fromDb).toList();
+  }
+
   @override
   Future<Result<ExpenseEntity, String>> add(ExpenseEntity data) async {
     try {
@@ -50,6 +69,27 @@ final class ExpenseRepositoryImpl extends ExpenseRepository {
   }
 
   @override
+  Future<Result<ExpenseEntity, String>> update(ExpenseEntity data) async {
+    try {
+      if (data.id == null) return const Error('Missing id');
+      if (data.amount <= 0) return const Error('Amount must be positive');
+      if (data.description.trim().isEmpty) return const Error('Description required');
+      final model = ExpenseModel(
+        id: data.id,
+        amount: data.amount,
+        description: data.description.trim(),
+        categoryId: data.categoryId,
+        dateMs: data.dateMs,
+      );
+      final count = await _db.updateExpense(model.toDb());
+      if (count == 0) return const Error('Expense not found');
+      return Success(model);
+    } catch (e) {
+      return Error(e.toString());
+    }
+  }
+
+  @override
   Future<List<ExpenseEntity>> backup() async {
     return getAll();
   }
@@ -68,6 +108,7 @@ final class ExpenseRepositoryImpl extends ExpenseRepository {
     }
   }
 }
+
 
 
 

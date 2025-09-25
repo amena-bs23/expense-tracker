@@ -18,8 +18,19 @@ abstract class DatabaseService {
 
   // Expense APIs
   Future<int> insertExpense(Map<String, Object?> data);
+  Future<int> updateExpense(Map<String, Object?> data);
   Future<int> deleteExpense(int id);
   Future<List<Map<String, Object?>>> getAllExpenses();
+
+  // Filtered & paginated expenses
+  Future<List<Map<String, Object?>>> getExpenses({
+    int? limit,
+    int? offset,
+    int? categoryId,
+    int? dateFromMs,
+    int? dateToMs,
+    String? search,
+  });
 }
 
 

@@ -37,38 +37,115 @@ class _ExpenseListPageState extends ConsumerState<ExpenseListPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(context.locale.home),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                context.locale.home,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+            ),
             const SizedBox(height: 16),
             Row(
               children: [
-                FilledButton(
-                  onPressed: () async {
-                    await ref.read(expenseProvider.notifier).backupToFile();
-                    if (mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Backup saved')),
-                      );
-                    }
-                  },
-                  child: const Text('Backup'),
+                Expanded(
+                  child: TextField(
+                    decoration: const InputDecoration(prefixIcon: Icon(Icons.search), hintText: 'Search description'),
+                    onChanged: (v) => ref.read(expenseProvider.notifier).updateFilters(search: v),
+                  ),
                 ),
-                const SizedBox(width: 8),
-                FilledButton(
-                  onPressed: () async {
-                    await ref.read(expenseProvider.notifier).restoreFromFile();
-                    if (mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Backup restored')),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: DropdownButton<int>(
+                    value: null,
+                    hint: const Text('Filter by category'),
+                    items: [
+                      const DropdownMenuItem(value: null, child: Text('All categories')),
+                      for (final c in cats.values)
+                        DropdownMenuItem(value: c.id, child: Text(c.name)),
+                    ],
+                    onChanged: (v) => ref.read(expenseProvider.notifier).updateFilters(categoryId: v),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: () async {
+                      final now = DateTime.now();
+                      final from = await showDatePicker(
+                        context: context,
+                        firstDate: DateTime(now.year - 5),
+                        lastDate: now,
+                        initialDate: now,
                       );
-                    }
-                  },
-                  child: const Text('Restore'),
+                      if (from == null) return;
+                      final to = await showDatePicker(
+                        context: context,
+                        firstDate: from,
+                        lastDate: DateTime(now.year + 5),
+                        initialDate: from,
+                      );
+                      if (to == null) return;
+                      ref.read(expenseProvider.notifier).updateFilters(
+                            fromMs: DateTime(from.year, from.month, from.day).millisecondsSinceEpoch,
+                            toMs: DateTime(to.year, to.month, to.day, 23, 59, 59).millisecondsSinceEpoch,
+                          );
+                    },
+                    icon: const Icon(Icons.date_range),
+                    label: const Text('Date range'),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: () async {
+                      await ref.read(expenseProvider.notifier).backupToFile();
+                      if (mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Backup saved')),
+                        );
+                      }
+                    },
+                    icon: const Icon(Icons.backup),
+                    label: const Text('Backup'),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: () async {
+                      await ref.read(expenseProvider.notifier).restoreFromFile();
+                      if (mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Backup restored')),
+                        );
+                      }
+                    },
+                    icon: const Icon(Icons.restore),
+                    label: const Text('Restore'),
+                  ),
                 ),
               ],
             ),
             const SizedBox(height: 16),
             Expanded(
-              child: ListView.separated(
+              child: RefreshIndicator(
+                onRefresh: () async => ref.read(expenseProvider.notifier).refresh(),
+                child: NotificationListener<ScrollNotification>(
+                  onNotification: (n) {
+                    if (n.metrics.pixels >= n.metrics.maxScrollExtent - 100) {
+                      ref.read(expenseProvider.notifier).loadMore();
+                    }
+                    return false;
+                  },
+                  child: ListView.separated(
                 itemCount: exp.items.length,
                 separatorBuilder: (_, __) => const Divider(),
                 itemBuilder: (context, i) {
@@ -77,13 +154,26 @@ class _ExpenseListPageState extends ConsumerState<ExpenseListPage> {
                   return ListTile(
                     leading: c != null ? CircleAvatar(backgroundColor: Color(c.color)) : const CircleAvatar(),
                     title: Text('${e.amount.toStringAsFixed(2)} - ${c?.name ?? ''}'),
-                    subtitle: Text(e.description),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.delete),
-                      onPressed: () => ref.read(expenseProvider.notifier).remove(e.id!),
+                    subtitle: Text('${DateTime.fromMillisecondsSinceEpoch(e.dateMs).toLocal().toString().split(' ').first} • ${e.description}'),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.edit),
+                          onPressed: () async {
+                            // Implement edit dialog/page as needed
+                          },
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.delete),
+                          onPressed: () => ref.read(expenseProvider.notifier).remove(e.id!),
+                        ),
+                      ],
                     ),
                   );
-                },
+                    },
+                  ),
+                ),
               ),
             ),
             FilledButton(

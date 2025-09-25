@@ -61,6 +61,16 @@ RestoreExpensesUseCase restoreExpensesUseCase(Ref ref) {
 }
 
 @riverpod
+UpdateExpenseUseCase updateExpenseUseCase(Ref ref) {
+  return UpdateExpenseUseCase(ref.read(expenseRepositoryProvider));
+}
+
+@riverpod
+GetFilteredExpensesUseCase getFilteredExpensesUseCase(Ref ref) {
+  return GetFilteredExpensesUseCase(ref.read(expenseRepositoryProvider));
+}
+
+@riverpod
 LoginUseCase loginUseCase(Ref ref) {
   return LoginUseCase(ref.read(authenticationRepositoryProvider));
 }
