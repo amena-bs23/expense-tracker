@@ -9,6 +9,8 @@ import '../../data/repositories/authentication_repository_impl.dart';
 import '../../data/repositories/locale_repository_impl.dart';
 import '../../data/repositories/router_repository_impl.dart';
 import '../../data/services/cache/cache_service.dart';
+import '../../data/services/database/database_service.dart';
+import '../../data/services/database/sqflite_database_service.dart';
 import '../../data/services/network/endpoints.dart';
 import '../../data/services/network/interceptor/token_manager.dart';
 import '../../data/services/network/rest_client.dart';

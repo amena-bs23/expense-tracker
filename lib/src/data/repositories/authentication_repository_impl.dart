@@ -1,22 +1,43 @@
+import 'dart:convert';
+
+import 'package:crypto/crypto.dart';
+
 import '../../core/base/failure.dart';
 import '../../core/base/result.dart';
 import '../../domain/entities/login_entity.dart';
 import '../../domain/entities/sign_up_entity.dart';
 import '../../domain/repositories/authentication_repository.dart';
-import '../models/login_model.dart';
+import '../models/user_model.dart';
 import '../services/cache/cache_service.dart';
-import '../services/network/rest_client.dart';
+import '../services/database/database_service.dart';
 
 final class AuthenticationRepositoryImpl extends AuthenticationRepository {
-  AuthenticationRepositoryImpl({required this.remote, required this.local});
+  AuthenticationRepositoryImpl({
+    required this.local,
+    required this.database,
+  });
 
-  final RestClient remote;
   final CacheService local;
+  final DatabaseService database;
 
   @override
   Future<SignUpResponseEntity> register(SignUpRequestEntity data) async {
-    // TODO: implement resetPassword
-    throw UnimplementedError();
+    final existing = await database.findUserByEmail(data.email);
+    if (existing != null) {
+      throw Exception('Email already registered');
+    }
+
+    final passwordHash = _hashPassword(data.password);
+    final user = UserModel(
+      email: data.email,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      passwordHash: passwordHash,
+      createdAtMs: DateTime.now().millisecondsSinceEpoch,
+    );
+    await database.insertUser(user.toDb());
+
+    return SignUpResponseEntity(accessToken: _fakeTokenFor(data.email));
   }
 
   @override
@@ -24,13 +45,21 @@ final class AuthenticationRepositoryImpl extends AuthenticationRepository {
     LoginRequestEntity data,
   ) async {
     return asyncGuard(() async {
-      final model = LoginRequestModel.fromEntity(data);
-      final response = await remote.login(model);
+      final row = await database.findUserByEmail(data.username);
+      if (row == null) {
+        throw Exception('Invalid credentials');
+      }
 
-      // Save the session if the user has selected the "Remember Me" option
+      final user = UserModel.fromDb(row);
+      final providedHash = _hashPassword(data.password);
+      if (providedHash != user.passwordHash) {
+        throw Exception('Invalid credentials');
+      }
+
       if (data.shouldRemeber ?? false) await _saveSession();
 
-      return LoginResponseModelMapper.fromJson(response.data);
+      final token = _fakeTokenFor(user.email);
+      return LoginResponseEntity(accessToken: token);
     });
   }
 
@@ -86,4 +115,11 @@ final class AuthenticationRepositoryImpl extends AuthenticationRepository {
   Future<void> logout() async {
     await local.remove([CacheKey.isLoggedIn, CacheKey.rememberMe]);
   }
+
+  String _hashPassword(String password) {
+    final bytes = utf8.encode(password);
+    return sha256.convert(bytes).toString();
+  }
+
+  String _fakeTokenFor(String email) => base64Url.encode(utf8.encode('local:$email'));
 }

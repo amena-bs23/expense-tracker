@@ -1,6 +1,11 @@
 part of '../dependency_injection.dart';
 
 @riverpod
+RegisterUseCase registerUseCase(Ref ref) {
+  return RegisterUseCase(ref.read(authenticationRepositoryProvider));
+}
+
+@riverpod
 LoginUseCase loginUseCase(Ref ref) {
   return LoginUseCase(ref.read(authenticationRepositoryProvider));
 }

@@ -41,7 +41,7 @@ final dioProvider = AutoDisposeProvider<Dio>.internal(
 // ignore: unused_element
 typedef DioRef = AutoDisposeProviderRef<Dio>;
 String _$authenticationRepositoryHash() =>
-    r'480a2a55d06482768b6470a2aa26a9444e5f8659';
+    r'b5cabb5b5f295734a6b0b3c2dbd75c1995c6ad23';
 
 /// See also [authenticationRepository].
 @ProviderFor(authenticationRepository)
@@ -110,6 +110,23 @@ final cacheServiceProvider = Provider<CacheService>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef CacheServiceRef = ProviderRef<CacheService>;
+String _$databaseServiceHash() => r'f5946cf0770e75483ea6612e6731fdd73981f53d';
+
+/// See also [databaseService].
+@ProviderFor(databaseService)
+final databaseServiceProvider = Provider<DatabaseService>.internal(
+  databaseService,
+  name: r'databaseServiceProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$databaseServiceHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef DatabaseServiceRef = ProviderRef<DatabaseService>;
 String _$restClientServiceHash() => r'87fbf3f2320c6d4a7dd07f6f9056c6d8f8d90f1f';
 
 /// See also [restClientService].
@@ -127,6 +144,23 @@ final restClientServiceProvider = AutoDisposeProvider<RestClient>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef RestClientServiceRef = AutoDisposeProviderRef<RestClient>;
+String _$registerUseCaseHash() => r'f5a42d07c82684bcf8120e614265b0cfb4a0e648';
+
+/// See also [registerUseCase].
+@ProviderFor(registerUseCase)
+final registerUseCaseProvider = AutoDisposeProvider<RegisterUseCase>.internal(
+  registerUseCase,
+  name: r'registerUseCaseProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$registerUseCaseHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef RegisterUseCaseRef = AutoDisposeProviderRef<RegisterUseCase>;
 String _$loginUseCaseHash() => r'b98519882aa37b0342393373924de47321902097';
 
 /// See also [loginUseCase].
