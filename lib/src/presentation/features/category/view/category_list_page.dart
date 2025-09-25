@@ -4,9 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/extensions/app_localization.dart';
 import '../../../core/application_state/logout_provider/logout_provider.dart';
-import '../riverpod/category_provider.dart';
 import '../../../core/router/routes.dart';
-import '../../../core/widgets/loading_indicator.dart';
+import '../riverpod/category_provider.dart';
 import 'category_dialog.dart';
 
 class CategoryListPage extends ConsumerStatefulWidget {
@@ -36,32 +35,45 @@ class _CategoryListPageState extends ConsumerState<CategoryListPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(context.locale.category),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                // context.locale.category,
+                'Category',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+            ),
             const SizedBox(height: 16),
             Row(
               children: [
-                FilledButton(
-                  onPressed: () async {
-                    await ref.read(categoryProvider.notifier).backupToFile();
-                    if (mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Backup saved')),
-                      );
-                    }
-                  },
-                  child: const Text('Backup'),
+                Expanded(
+                  child: FilledButton.icon(
+                    onPressed: () async {
+                      await ref.read(categoryProvider.notifier).backupToFile();
+                      if (mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Backup saved')),
+                        );
+                      }
+                    },
+                    icon: const Icon(Icons.backup),
+                    label: const Text('Backup'),
+                  ),
                 ),
-                const SizedBox(width: 8),
-                FilledButton(
-                  onPressed: () async {
-                    await ref.read(categoryProvider.notifier).restoreFromFile();
-                    if (mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Backup restored')),
-                      );
-                    }
-                  },
-                  child: const Text('Restore'),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: () async {
+                      await ref.read(categoryProvider.notifier).restoreFromFile();
+                      if (mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Backup restored')),
+                        );
+                      }
+                    },
+                    icon: const Icon(Icons.restore),
+                    label: const Text('Restore'),
+                  ),
                 ),
               ],
             ),
@@ -87,7 +99,8 @@ class _CategoryListPageState extends ConsumerState<CategoryListPage> {
                         ),
                         IconButton(
                           icon: const Icon(Icons.delete),
-                          onPressed: () => ref.read(categoryProvider.notifier).remove(c.id!),
+                          onPressed: () =>
+                              ref.read(categoryProvider.notifier).remove(c.id!),
                         ),
                       ],
                     ),
@@ -96,24 +109,40 @@ class _CategoryListPageState extends ConsumerState<CategoryListPage> {
               ),
             ),
             const SizedBox(height: 16),
-            FilledButton(
-              onPressed: () async {
-                await showCategoryDialog(context, ref, null);
-              },
-              child: const Text('Add'),
-            ),
-            FilledButton(
-              onPressed: () {
-                ref.read(logoutProvider.notifier).call();
-              },
-              child: state.isLoading
-                  ? const LoadingIndicator()
-                  : Text(context.locale.logout),
+            Row(
+              children: [
+                Expanded(
+                  child: FilledButton.icon(
+                    onPressed: () async {
+                      await showCategoryDialog(context, ref, null);
+                    },
+                    icon: const Icon(Icons.add),
+                    label: const Text('Add'),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: () {
+                      ref.read(logoutProvider.notifier).call();
+                    },
+                    icon: state.isLoading
+                        ? const SizedBox(
+                            width: 16,
+                            height: 16,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                        : const Icon(Icons.logout),
+                    label: state.isLoading
+                        ? const Text('Logging out...')
+                        : Text(context.locale.logout),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
       ),
     );
   }
-
 }
