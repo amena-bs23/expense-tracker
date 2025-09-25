@@ -18,9 +18,6 @@ class AppLocalizationsBn extends AppLocalizations {
   String get login => 'লগইন';
 
   @override
-  String get category => 'বিভাগ';
-
-  @override
   String get createNewPassword => 'নতুন পাসওয়ার্ড তৈরি করুন';
 
   @override
