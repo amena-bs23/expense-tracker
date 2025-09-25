@@ -15,6 +15,11 @@ abstract class DatabaseService {
   Future<int> updateCategory(Map<String, Object?> data);
   Future<int> deleteCategory(int id);
   Future<List<Map<String, Object?>>> getAllCategories();
+
+  // Expense APIs
+  Future<int> insertExpense(Map<String, Object?> data);
+  Future<int> deleteExpense(int id);
+  Future<List<Map<String, Object?>>> getAllExpenses();
 }
 
 

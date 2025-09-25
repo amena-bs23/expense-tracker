@@ -77,6 +77,23 @@ final categoryRepositoryProvider = Provider<CategoryRepository>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef CategoryRepositoryRef = ProviderRef<CategoryRepository>;
+String _$expenseRepositoryHash() => r'db15fa97b54ccb87222436e7a68cee3eeddd6d19';
+
+/// See also [expenseRepository].
+@ProviderFor(expenseRepository)
+final expenseRepositoryProvider = Provider<ExpenseRepository>.internal(
+  expenseRepository,
+  name: r'expenseRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$expenseRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef ExpenseRepositoryRef = ProviderRef<ExpenseRepository>;
 String _$routerRepositoryHash() => r'277e8ef0a2084e2932037d567391fefea47aaaf9';
 
 /// See also [routerRepository].
@@ -298,6 +315,102 @@ final restoreCategoriesUseCaseProvider =
 // ignore: unused_element
 typedef RestoreCategoriesUseCaseRef =
     AutoDisposeProviderRef<RestoreCategoriesUseCase>;
+String _$getExpensesUseCaseHash() =>
+    r'44ab78f969cd355068f7c42fb592e5d8638edc66';
+
+/// See also [getExpensesUseCase].
+@ProviderFor(getExpensesUseCase)
+final getExpensesUseCaseProvider =
+    AutoDisposeProvider<GetExpensesUseCase>.internal(
+      getExpensesUseCase,
+      name: r'getExpensesUseCaseProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$getExpensesUseCaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef GetExpensesUseCaseRef = AutoDisposeProviderRef<GetExpensesUseCase>;
+String _$addExpenseUseCaseHash() => r'319e060039e94ded493b1da32457e85d2489672b';
+
+/// See also [addExpenseUseCase].
+@ProviderFor(addExpenseUseCase)
+final addExpenseUseCaseProvider =
+    AutoDisposeProvider<AddExpenseUseCase>.internal(
+      addExpenseUseCase,
+      name: r'addExpenseUseCaseProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$addExpenseUseCaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef AddExpenseUseCaseRef = AutoDisposeProviderRef<AddExpenseUseCase>;
+String _$deleteExpenseUseCaseHash() =>
+    r'c4cdb8b4807a70e77d574ffdde2662f1be29022a';
+
+/// See also [deleteExpenseUseCase].
+@ProviderFor(deleteExpenseUseCase)
+final deleteExpenseUseCaseProvider =
+    AutoDisposeProvider<DeleteExpenseUseCase>.internal(
+      deleteExpenseUseCase,
+      name: r'deleteExpenseUseCaseProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$deleteExpenseUseCaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef DeleteExpenseUseCaseRef = AutoDisposeProviderRef<DeleteExpenseUseCase>;
+String _$backupExpensesUseCaseHash() =>
+    r'cf86473b1008586655e14159fea793625b0796eb';
+
+/// See also [backupExpensesUseCase].
+@ProviderFor(backupExpensesUseCase)
+final backupExpensesUseCaseProvider =
+    AutoDisposeProvider<BackupExpensesUseCase>.internal(
+      backupExpensesUseCase,
+      name: r'backupExpensesUseCaseProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$backupExpensesUseCaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef BackupExpensesUseCaseRef =
+    AutoDisposeProviderRef<BackupExpensesUseCase>;
+String _$restoreExpensesUseCaseHash() =>
+    r'e9be7d90468586778c1d769a62aa4b6f61c21832';
+
+/// See also [restoreExpensesUseCase].
+@ProviderFor(restoreExpensesUseCase)
+final restoreExpensesUseCaseProvider =
+    AutoDisposeProvider<RestoreExpensesUseCase>.internal(
+      restoreExpensesUseCase,
+      name: r'restoreExpensesUseCaseProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$restoreExpensesUseCaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef RestoreExpensesUseCaseRef =
+    AutoDisposeProviderRef<RestoreExpensesUseCase>;
 String _$loginUseCaseHash() => r'b98519882aa37b0342393373924de47321902097';
 
 /// See also [loginUseCase].

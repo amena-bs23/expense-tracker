@@ -6,6 +6,7 @@ import '../../../../core/extensions/app_localization.dart';
 import '../../../core/application_state/logout_provider/logout_provider.dart';
 import '../../../core/router/routes.dart';
 import '../../../core/widgets/loading_indicator.dart';
+import '../../category/view/category_list_page.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -34,6 +35,19 @@ class _HomePageState extends ConsumerState<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(context.locale.home),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const CategoryListPage();
+                    },
+                  ),
+                );
+              },
+              child: const Text('Hello !'),
+            ),
             const SizedBox(height: 16),
             FilledButton(
               onPressed: () {

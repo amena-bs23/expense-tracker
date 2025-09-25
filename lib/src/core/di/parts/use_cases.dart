@@ -36,6 +36,31 @@ RestoreCategoriesUseCase restoreCategoriesUseCase(Ref ref) {
 }
 
 @riverpod
+GetExpensesUseCase getExpensesUseCase(Ref ref) {
+  return GetExpensesUseCase(ref.read(expenseRepositoryProvider));
+}
+
+@riverpod
+AddExpenseUseCase addExpenseUseCase(Ref ref) {
+  return AddExpenseUseCase(ref.read(expenseRepositoryProvider));
+}
+
+@riverpod
+DeleteExpenseUseCase deleteExpenseUseCase(Ref ref) {
+  return DeleteExpenseUseCase(ref.read(expenseRepositoryProvider));
+}
+
+@riverpod
+BackupExpensesUseCase backupExpensesUseCase(Ref ref) {
+  return BackupExpensesUseCase(ref.read(expenseRepositoryProvider));
+}
+
+@riverpod
+RestoreExpensesUseCase restoreExpensesUseCase(Ref ref) {
+  return RestoreExpensesUseCase(ref.read(expenseRepositoryProvider));
+}
+
+@riverpod
 LoginUseCase loginUseCase(Ref ref) {
   return LoginUseCase(ref.read(authenticationRepositoryProvider));
 }

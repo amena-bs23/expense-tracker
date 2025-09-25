@@ -1,28 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'registration_provider.dart';
+part of 'expense_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$registrationHash() => r'3a4f3837df8b9244f4f35091f25d8cb419484083';
+String _$expenseHash() => r'28470ab8c39259d6b7989956b11fade5ed0d2627';
 
-/// See also [Registration].
-@ProviderFor(Registration)
-final registrationProvider =
-    AutoDisposeNotifierProvider<Registration, RegistrationState>.internal(
-      Registration.new,
-      name: r'registrationProvider',
+/// See also [Expense].
+@ProviderFor(Expense)
+final expenseProvider =
+    AutoDisposeNotifierProvider<Expense, ExpenseState>.internal(
+      Expense.new,
+      name: r'expenseProvider',
       debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
           ? null
-          : _$registrationHash,
+          : _$expenseHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
 
-typedef _$Registration = AutoDisposeNotifier<RegistrationState>;
+typedef _$Expense = AutoDisposeNotifier<ExpenseState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
-
-

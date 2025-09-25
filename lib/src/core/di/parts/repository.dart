@@ -14,6 +14,11 @@ CategoryRepository categoryRepository(Ref ref) {
 }
 
 @Riverpod(keepAlive: true)
+ExpenseRepository expenseRepository(Ref ref) {
+  return ExpenseRepositoryImpl(ref.read(databaseServiceProvider));
+}
+
+@Riverpod(keepAlive: true)
 RouterRepository routerRepository(Ref ref) {
   return RouterRepositoryImpl(cacheService: ref.read(cacheServiceProvider));
 }

@@ -15,6 +15,7 @@ class SqfliteDatabaseService implements DatabaseService {
   // Tables
   static const String tableUsers = 'users';
   static const String tableCategories = 'categories';
+  static const String tableExpenses = 'expenses';
 
   // User columns
   static const String colUserId = 'id';
@@ -54,6 +55,16 @@ class SqfliteDatabaseService implements DatabaseService {
             name TEXT UNIQUE NOT NULL,
             icon TEXT NOT NULL,
             color INTEGER NOT NULL
+          )
+        ''');
+        await db.execute('''
+          CREATE TABLE $tableExpenses (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            amount REAL NOT NULL,
+            description TEXT NOT NULL,
+            category_id INTEGER NOT NULL,
+            date_ms INTEGER NOT NULL,
+            FOREIGN KEY(category_id) REFERENCES $tableCategories(id)
           )
         ''');
       },
@@ -105,6 +116,21 @@ class SqfliteDatabaseService implements DatabaseService {
   @override
   Future<List<Map<String, Object?>>> getAllCategories() async {
     return db.query(tableCategories, orderBy: 'name ASC');
+  }
+
+  @override
+  Future<int> insertExpense(Map<String, Object?> data) {
+    return db.insert(tableExpenses, data, conflictAlgorithm: ConflictAlgorithm.abort);
+  }
+
+  @override
+  Future<int> deleteExpense(int id) {
+    return db.delete(tableExpenses, where: 'id = ?', whereArgs: [id]);
+  }
+
+  @override
+  Future<List<Map<String, Object?>>> getAllExpenses() async {
+    return db.query(tableExpenses, orderBy: 'date_ms DESC');
   }
 }
 

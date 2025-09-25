@@ -11,13 +11,15 @@ class GetCategoriesUseCase {
 class CreateCategoryUseCase {
   CreateCategoryUseCase(this.repository);
   final CategoryRepository repository;
-  Future<Result<CategoryEntity, String>> call(CategoryEntity data) => repository.create(data);
+  Future<Result<CategoryEntity, String>> call(CategoryEntity data) =>
+      repository.create(data);
 }
 
 class UpdateCategoryUseCase {
   UpdateCategoryUseCase(this.repository);
   final CategoryRepository repository;
-  Future<Result<CategoryEntity, String>> call(CategoryEntity data) => repository.update(data);
+  Future<Result<CategoryEntity, String>> call(CategoryEntity data) =>
+      repository.update(data);
 }
 
 class DeleteCategoryUseCase {
@@ -37,5 +39,3 @@ class RestoreCategoriesUseCase {
   final CategoryRepository repository;
   Future<void> call(List<CategoryEntity> items) => repository.restore(items);
 }
-
-

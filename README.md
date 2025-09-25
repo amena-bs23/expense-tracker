@@ -476,3 +476,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Custom icon and color selection (dropdown)
 - Local persistence with Sqflite
 - Backup/restore to JSON file (offline sync simulation) via Category screen
+
+## Expense Logging
+
+- Add expense with amount, description, category, and date
+- Validate input (positive amount, required fields)
+- Local persistence with Sqflite
+- Backup/restore to JSON file (offline sync simulation) via Expense screen
