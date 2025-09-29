@@ -3,12 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../core/extensions/app_localization.dart';
+import '../../../../../domain/entities/expense_entity.dart';
 import '../../../../core/application_state/logout_provider/logout_provider.dart';
 import '../../../../core/router/routes.dart';
-import '../../../../core/widgets/loading_indicator.dart';
-import '../../riverpod/expense_provider.dart';
-import '../../../../../domain/entities/expense_entity.dart';
 import '../../../category/riverpod/category_provider.dart';
+import '../../riverpod/expense_provider.dart';
 
 class ExpenseListPage extends ConsumerStatefulWidget {
   const ExpenseListPage({super.key});
@@ -28,7 +27,7 @@ class _ExpenseListPageState extends ConsumerState<ExpenseListPage> {
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(logoutProvider);
+    ref.watch(logoutProvider);
     final exp = ref.watch(expenseProvider);
     final cats = {for (final c in ref.watch(categoryProvider).items) c.id!: c};
 
@@ -50,8 +49,13 @@ class _ExpenseListPageState extends ConsumerState<ExpenseListPage> {
               children: [
                 Expanded(
                   child: TextField(
-                    decoration: const InputDecoration(prefixIcon: Icon(Icons.search), hintText: 'Search description'),
-                    onChanged: (v) => ref.read(expenseProvider.notifier).updateFilters(search: v),
+                    decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.search),
+                      hintText: 'Search description',
+                    ),
+                    onChanged: (v) => ref
+                        .read(expenseProvider.notifier)
+                        .updateFilters(search: v),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -60,11 +64,16 @@ class _ExpenseListPageState extends ConsumerState<ExpenseListPage> {
                     value: null,
                     hint: const Text('Filter by category'),
                     items: [
-                      const DropdownMenuItem(value: null, child: Text('All categories')),
+                      const DropdownMenuItem(
+                        value: null,
+                        child: Text('All categories'),
+                      ),
                       for (final c in cats.values)
                         DropdownMenuItem(value: c.id, child: Text(c.name)),
                     ],
-                    onChanged: (v) => ref.read(expenseProvider.notifier).updateFilters(categoryId: v),
+                    onChanged: (v) => ref
+                        .read(expenseProvider.notifier)
+                        .updateFilters(categoryId: v),
                   ),
                 ),
               ],
@@ -90,9 +99,22 @@ class _ExpenseListPageState extends ConsumerState<ExpenseListPage> {
                         initialDate: from,
                       );
                       if (to == null) return;
-                      ref.read(expenseProvider.notifier).updateFilters(
-                            fromMs: DateTime(from.year, from.month, from.day).millisecondsSinceEpoch,
-                            toMs: DateTime(to.year, to.month, to.day, 23, 59, 59).millisecondsSinceEpoch,
+                      ref
+                          .read(expenseProvider.notifier)
+                          .updateFilters(
+                            fromMs: DateTime(
+                              from.year,
+                              from.month,
+                              from.day,
+                            ).millisecondsSinceEpoch,
+                            toMs: DateTime(
+                              to.year,
+                              to.month,
+                              to.day,
+                              23,
+                              59,
+                              59,
+                            ).millisecondsSinceEpoch,
                           );
                     },
                     icon: const Icon(Icons.date_range),
@@ -122,7 +144,9 @@ class _ExpenseListPageState extends ConsumerState<ExpenseListPage> {
                 Expanded(
                   child: OutlinedButton.icon(
                     onPressed: () async {
-                      await ref.read(expenseProvider.notifier).restoreFromFile();
+                      await ref
+                          .read(expenseProvider.notifier)
+                          .restoreFromFile();
                       if (mounted) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Backup restored')),
@@ -138,7 +162,8 @@ class _ExpenseListPageState extends ConsumerState<ExpenseListPage> {
             const SizedBox(height: 16),
             Expanded(
               child: RefreshIndicator(
-                onRefresh: () async => ref.read(expenseProvider.notifier).refresh(),
+                onRefresh: () async =>
+                    ref.read(expenseProvider.notifier).refresh(),
                 child: NotificationListener<ScrollNotification>(
                   onNotification: (n) {
                     if (n.metrics.pixels >= n.metrics.maxScrollExtent - 100) {
@@ -147,97 +172,138 @@ class _ExpenseListPageState extends ConsumerState<ExpenseListPage> {
                     return false;
                   },
                   child: ListView.separated(
-                itemCount: exp.items.length,
-                separatorBuilder: (_, __) => const Divider(),
-                itemBuilder: (context, i) {
-                  final e = exp.items[i];
-                  final c = cats[e.categoryId];
-                  return ListTile(
-                    leading: c != null ? CircleAvatar(backgroundColor: Color(c.color)) : const CircleAvatar(),
-                    title: Text('${e.amount.toStringAsFixed(2)} - ${c?.name ?? ''}'),
-                    subtitle: Text('${DateTime.fromMillisecondsSinceEpoch(e.dateMs).toLocal().toString().split(' ').first} • ${e.description}'),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.edit),
-                          onPressed: () async {
-                            final amountCtrl = TextEditingController(text: e.amount.toStringAsFixed(2));
-                            final descCtrl = TextEditingController(text: e.description);
-                            int selectedCat = e.categoryId;
-                            final formKey = GlobalKey<FormState>();
+                    itemCount: exp.items.length,
+                    separatorBuilder: (_, __) => const Divider(),
+                    itemBuilder: (context, i) {
+                      final e = exp.items[i];
+                      final c = cats[e.categoryId];
+                      return ListTile(
+                        leading: c != null
+                            ? CircleAvatar(backgroundColor: Color(c.color))
+                            : const CircleAvatar(),
+                        title: Text(
+                          '${e.amount.toStringAsFixed(2)} - ${c?.name ?? ''}',
+                        ),
+                        subtitle: Text(
+                          '${DateTime.fromMillisecondsSinceEpoch(e.dateMs).toLocal().toString().split(' ').first} • ${e.description}',
+                        ),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.edit),
+                              onPressed: () async {
+                                final amountCtrl = TextEditingController(
+                                  text: e.amount.toStringAsFixed(2),
+                                );
+                                final descCtrl = TextEditingController(
+                                  text: e.description,
+                                );
+                                int selectedCat = e.categoryId;
+                                final formKey = GlobalKey<FormState>();
 
-                            await showDialog(
-                              context: context,
-                              builder: (_) => AlertDialog(
-                                title: const Text('Edit Expense'),
-                                content: Form(
-                                  key: formKey,
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      TextFormField(
-                                        controller: amountCtrl,
-                                        keyboardType: TextInputType.number,
-                                        decoration: const InputDecoration(labelText: 'Amount'),
-                                        validator: (v) {
-                                          final n = double.tryParse(v ?? '');
-                                          if (n == null) return 'This field is required';
-                                          if (n <= 0) return 'Value must be positive';
-                                          return null;
-                                        },
-                                      ),
-                                      const SizedBox(height: 8),
-                                      TextFormField(
-                                        controller: descCtrl,
-                                        decoration: const InputDecoration(labelText: 'Description'),
-                                        validator: (v) => (v == null || v.trim().isEmpty) ? 'This field is required' : null,
-                                      ),
-                                      const SizedBox(height: 8),
-                                      DropdownButton<int>(
-                                        value: selectedCat,
-                                        items: [
-                                          for (final c in cats.values)
-                                            DropdownMenuItem(value: c.id, child: Text(c.name)),
+                                await showDialog(
+                                  context: context,
+                                  builder: (dialogContext) => AlertDialog(
+                                    title: const Text('Edit Expense'),
+                                    content: Form(
+                                      key: formKey,
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          TextFormField(
+                                            controller: amountCtrl,
+                                            keyboardType: TextInputType.number,
+                                            decoration: const InputDecoration(
+                                              labelText: 'Amount',
+                                            ),
+                                            validator: (v) {
+                                              final n = double.tryParse(
+                                                v ?? '',
+                                              );
+                                              if (n == null)
+                                                return 'This field is required';
+                                              if (n <= 0)
+                                                return 'Value must be positive';
+                                              return null;
+                                            },
+                                          ),
+                                          const SizedBox(height: 8),
+                                          TextFormField(
+                                            controller: descCtrl,
+                                            decoration: const InputDecoration(
+                                              labelText: 'Description',
+                                            ),
+                                            validator: (v) =>
+                                                (v == null || v.trim().isEmpty)
+                                                ? 'This field is required'
+                                                : null,
+                                          ),
+                                          const SizedBox(height: 8),
+                                          DropdownButton<int>(
+                                            value: selectedCat,
+                                            items: [
+                                              for (final c in cats.values)
+                                                DropdownMenuItem(
+                                                  value: c.id,
+                                                  child: Text(c.name),
+                                                ),
+                                            ],
+                                            onChanged: (v) => selectedCat = v!,
+                                          ),
                                         ],
-                                        onChanged: (v) => selectedCat = v!,
+                                      ),
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(dialogContext).pop(),
+                                        child: const Text('Cancel'),
+                                      ),
+                                      FilledButton(
+                                        onPressed: () async {
+                                          if (!formKey.currentState!.validate())
+                                            return;
+                                          await ref
+                                              .read(expenseProvider.notifier)
+                                              .edit(
+                                                ExpenseEntity(
+                                                  id: e.id,
+                                                  amount: double.parse(
+                                                    amountCtrl.text,
+                                                  ),
+                                                  description: descCtrl.text
+                                                      .trim(),
+                                                  categoryId: selectedCat,
+                                                  dateMs: e.dateMs,
+                                                ),
+                                              );
+                                          if (context.mounted)
+                                            Navigator.of(dialogContext).pop();
+                                          ScaffoldMessenger.of(
+                                            context,
+                                          ).showSnackBar(
+                                            const SnackBar(
+                                              content: Text('Expense updated'),
+                                            ),
+                                          );
+                                        },
+                                        child: const Text('Save'),
                                       ),
                                     ],
                                   ),
-                                ),
-                                actions: [
-                                  TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-                                  FilledButton(
-                                    onPressed: () async {
-                                      if (!formKey.currentState!.validate()) return;
-                                      await ref.read(expenseProvider.notifier).edit(
-                                        ExpenseEntity(
-                                          id: e.id,
-                                          amount: double.parse(amountCtrl.text),
-                                          description: descCtrl.text.trim(),
-                                          categoryId: selectedCat,
-                                          dateMs: e.dateMs,
-                                        ),
-                                      );
-                                      if (context.mounted) Navigator.pop(context);
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        const SnackBar(content: Text('Expense updated')),
-                                      );
-                                    },
-                                    child: const Text('Save'),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
+                                );
+                              },
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.delete),
+                              onPressed: () => ref
+                                  .read(expenseProvider.notifier)
+                                  .remove(e.id!),
+                            ),
+                          ],
                         ),
-                        IconButton(
-                          icon: const Icon(Icons.delete),
-                          onPressed: () => ref.read(expenseProvider.notifier).remove(e.id!),
-                        ),
-                      ],
-                    ),
-                  );
+                      );
                     },
                   ),
                 ),

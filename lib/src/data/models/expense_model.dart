@@ -25,3 +25,4 @@ class ExpenseModel extends ExpenseEntity {
     dateMs: row['date_ms'] as int,
   );
 }
+

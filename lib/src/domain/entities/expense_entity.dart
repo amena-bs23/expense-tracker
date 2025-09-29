@@ -13,3 +13,4 @@ class ExpenseEntity {
   final int categoryId;
   final int dateMs;
 }
+

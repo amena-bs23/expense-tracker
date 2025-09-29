@@ -6480,3 +6480,196 @@ at:
 #1      Future.any.onValue (dart:async/future.dart:616)
 <asynchronous suspension>
 
+The request analysis.setContextRoots failed with the following error:
+RequestErrorCode.PLUGIN_ERROR
+Exception: Failed to run "pub get" in the client project:
+Resolving dependencies...
+
+Got socket error trying to find package riverpod_lint at https://pub.dev.
+
+at:
+#0      CustomLintWorkspace.runPubGet (package:custom_lint/src/workspace.dart:774)
+<asynchronous suspension>
+#1      CustomLintWorkspace.resolvePluginHost (package:custom_lint/src/workspace.dart:757)
+<asynchronous suspension>
+#2      SocketCustomLintServerToClientChannel._startProcess (package:custom_lint/src/v2/server_to_client_channel.dart:151)
+<asynchronous suspension>
+#3      SocketCustomLintServerToClientChannel.init (package:custom_lint/src/v2/server_to_client_channel.dart:111)
+<asynchronous suspension>
+#4      CustomLintServer._maybeSpawnCustomLintPlugin (package:custom_lint/src/v2/custom_lint_analyzer_plugin.dart:396)
+<asynchronous suspension>
+#5      CustomLintServer._handleAnalysisSetContextRoots.<anonymous closure> (package:custom_lint/src/v2/custom_lint_analyzer_plugin.dart:343)
+<asynchronous suspension>
+#6      PendingOperation.run (package:custom_lint/src/async_operation.dart:22)
+<asynchronous suspension>
+#7      CustomLintServer._handleRequest (package:custom_lint/src/v2/custom_lint_analyzer_plugin.dart:175)
+<asynchronous suspension>
+
+The request analysis.setContextRoots failed with the following error:
+RequestErrorCode.PLUGIN_ERROR
+Exception: Failed to run "pub get" in the client project:
+Resolving dependencies...
+
+Got socket error trying to find package riverpod_lint at https://pub.dev.
+
+at:
+#0      CustomLintWorkspace.runPubGet (package:custom_lint/src/workspace.dart:774)
+<asynchronous suspension>
+#1      CustomLintWorkspace.resolvePluginHost (package:custom_lint/src/workspace.dart:757)
+<asynchronous suspension>
+#2      SocketCustomLintServerToClientChannel._startProcess (package:custom_lint/src/v2/server_to_client_channel.dart:151)
+<asynchronous suspension>
+#3      SocketCustomLintServerToClientChannel.init (package:custom_lint/src/v2/server_to_client_channel.dart:111)
+<asynchronous suspension>
+#4      CustomLintServer._maybeSpawnCustomLintPlugin (package:custom_lint/src/v2/custom_lint_analyzer_plugin.dart:396)
+<asynchronous suspension>
+#5      CustomLintServer._handleAnalysisSetContextRoots.<anonymous closure> (package:custom_lint/src/v2/custom_lint_analyzer_plugin.dart:343)
+<asynchronous suspension>
+#6      PendingOperation.run (package:custom_lint/src/async_operation.dart:22)
+<asynchronous suspension>
+#7      CustomLintServer._handleRequest (package:custom_lint/src/v2/custom_lint_analyzer_plugin.dart:175)
+<asynchronous suspension>
+
+[custom_lint] 2025-09-26T11:02:29.097375 Loading dynamic library failed: not a Mach-O shared object
+[custom_lint] 2025-09-26T11:02:29.097375 lib/custom_lint_client.dart is not an AOT snapshot, it cannot be run with 'dartaotruntime'
+[custom_lint] 2025-09-26T11:02:29.097375
+[custom_lint] 2025-09-26T11:02:29.097375
+Failed to start pluginsThe request analysis.setContextRoots failed with the following error:
+RequestErrorCode.PLUGIN_ERROR
+Bad state: Failed to start the plugins.
+at:
+#0      SocketCustomLintServerToClientChannel._checkInitializationFail.<anonymous closure> (package:custom_lint/src/v2/server_to_client_channel.dart:223)
+<asynchronous suspension>
+#1      Future.any.onValue (dart:async/future.dart:616)
+<asynchronous suspension>
+
+[custom_lint] 2025-09-26T11:02:29.307416 Loading dynamic library failed: not a Mach-O shared object
+[custom_lint] 2025-09-26T11:02:29.307416 lib/custom_lint_client.dart is not an AOT snapshot, it cannot be run with 'dartaotruntime'
+[custom_lint] 2025-09-26T11:02:29.307416
+[custom_lint] 2025-09-26T11:02:29.307416
+Failed to start pluginsThe request analysis.setContextRoots failed with the following error:
+RequestErrorCode.PLUGIN_ERROR
+Bad state: Failed to start the plugins.
+at:
+#0      SocketCustomLintServerToClientChannel._checkInitializationFail.<anonymous closure> (package:custom_lint/src/v2/server_to_client_channel.dart:223)
+<asynchronous suspension>
+#1      Future.any.onValue (dart:async/future.dart:616)
+<asynchronous suspension>
+
+[custom_lint] 2025-09-26T11:02:29.814302 Loading dynamic library failed: not a Mach-O shared object
+[custom_lint] 2025-09-26T11:02:29.814302 lib/custom_lint_client.dart is not an AOT snapshot, it cannot be run with 'dartaotruntime'
+[custom_lint] 2025-09-26T11:02:29.814302
+[custom_lint] 2025-09-26T11:02:29.814302
+Failed to start pluginsThe request analysis.setContextRoots failed with the following error:
+RequestErrorCode.PLUGIN_ERROR
+Bad state: Failed to start the plugins.
+at:
+#0      SocketCustomLintServerToClientChannel._checkInitializationFail.<anonymous closure> (package:custom_lint/src/v2/server_to_client_channel.dart:223)
+<asynchronous suspension>
+#1      Future.any.onValue (dart:async/future.dart:616)
+<asynchronous suspension>
+
+[custom_lint] 2025-09-29T11:26:10.313989 Loading dynamic library failed: not a Mach-O shared object
+[custom_lint] 2025-09-29T11:26:10.313989 lib/custom_lint_client.dart is not an AOT snapshot, it cannot be run with 'dartaotruntime'
+[custom_lint] 2025-09-29T11:26:10.313989
+[custom_lint] 2025-09-29T11:26:10.313989
+Failed to start pluginsThe request analysis.setContextRoots failed with the following error:
+RequestErrorCode.PLUGIN_ERROR
+Bad state: Failed to start the plugins.
+at:
+#0      SocketCustomLintServerToClientChannel._checkInitializationFail.<anonymous closure> (package:custom_lint/src/v2/server_to_client_channel.dart:223)
+<asynchronous suspension>
+#1      Future.any.onValue (dart:async/future.dart:616)
+<asynchronous suspension>
+
+[custom_lint] 2025-09-29T11:26:31.718587 Loading dynamic library failed: not a Mach-O shared object
+[custom_lint] 2025-09-29T11:26:31.718587 lib/custom_lint_client.dart is not an AOT snapshot, it cannot be run with 'dartaotruntime'
+[custom_lint] 2025-09-29T11:26:31.718587
+[custom_lint] 2025-09-29T11:26:31.718587
+Failed to start pluginsThe request analysis.setContextRoots failed with the following error:
+RequestErrorCode.PLUGIN_ERROR
+Bad state: Failed to start the plugins.
+at:
+#0      SocketCustomLintServerToClientChannel._checkInitializationFail.<anonymous closure> (package:custom_lint/src/v2/server_to_client_channel.dart:223)
+<asynchronous suspension>
+#1      Future.any.onValue (dart:async/future.dart:616)
+<asynchronous suspension>
+
+[custom_lint] 2025-09-29T11:26:32.489226 Loading dynamic library failed: not a Mach-O shared object
+[custom_lint] 2025-09-29T11:26:32.489226 lib/custom_lint_client.dart is not an AOT snapshot, it cannot be run with 'dartaotruntime'
+[custom_lint] 2025-09-29T11:26:32.489226
+[custom_lint] 2025-09-29T11:26:32.489226
+Failed to start pluginsThe request analysis.setContextRoots failed with the following error:
+RequestErrorCode.PLUGIN_ERROR
+Bad state: Failed to start the plugins.
+at:
+#0      SocketCustomLintServerToClientChannel._checkInitializationFail.<anonymous closure> (package:custom_lint/src/v2/server_to_client_channel.dart:223)
+<asynchronous suspension>
+#1      Future.any.onValue (dart:async/future.dart:616)
+<asynchronous suspension>
+
+[custom_lint] 2025-09-29T11:33:20.177736 Loading dynamic library failed: not a Mach-O shared object
+[custom_lint] 2025-09-29T11:33:20.177736 lib/custom_lint_client.dart is not an AOT snapshot, it cannot be run with 'dartaotruntime'
+[custom_lint] 2025-09-29T11:33:20.177736
+[custom_lint] 2025-09-29T11:33:20.177736
+Failed to start pluginsThe request analysis.setContextRoots failed with the following error:
+RequestErrorCode.PLUGIN_ERROR
+Bad state: Failed to start the plugins.
+at:
+#0      SocketCustomLintServerToClientChannel._checkInitializationFail.<anonymous closure> (package:custom_lint/src/v2/server_to_client_channel.dart:223)
+<asynchronous suspension>
+#1      Future.any.onValue (dart:async/future.dart:616)
+<asynchronous suspension>
+
+[custom_lint] 2025-09-29T14:48:44.703489 Loading dynamic library failed: not a Mach-O shared object
+[custom_lint] 2025-09-29T14:48:44.703489 lib/custom_lint_client.dart is not an AOT snapshot, it cannot be run with 'dartaotruntime'
+[custom_lint] 2025-09-29T14:48:44.703489
+[custom_lint] 2025-09-29T14:48:44.703489
+Failed to start pluginsThe request analysis.setContextRoots failed with the following error:
+RequestErrorCode.PLUGIN_ERROR
+Bad state: Failed to start the plugins.
+at:
+#0      SocketCustomLintServerToClientChannel._checkInitializationFail.<anonymous closure> (package:custom_lint/src/v2/server_to_client_channel.dart:223)
+<asynchronous suspension>
+#1      Future.any.onValue (dart:async/future.dart:616)
+<asynchronous suspension>
+
+[custom_lint] 2025-09-29T15:34:43.543175 Loading dynamic library failed: not a Mach-O shared object
+[custom_lint] 2025-09-29T15:34:43.543175 lib/custom_lint_client.dart is not an AOT snapshot, it cannot be run with 'dartaotruntime'
+[custom_lint] 2025-09-29T15:34:43.543175
+[custom_lint] 2025-09-29T15:34:43.543175
+Failed to start pluginsThe request analysis.setContextRoots failed with the following error:
+RequestErrorCode.PLUGIN_ERROR
+Bad state: Failed to start the plugins.
+at:
+#0      SocketCustomLintServerToClientChannel._checkInitializationFail.<anonymous closure> (package:custom_lint/src/v2/server_to_client_channel.dart:223)
+<asynchronous suspension>
+#1      Future.any.onValue (dart:async/future.dart:616)
+<asynchronous suspension>
+
+[custom_lint] 2025-09-29T18:46:50.891155 Loading dynamic library failed: not a Mach-O shared object
+[custom_lint] 2025-09-29T18:46:50.891155 lib/custom_lint_client.dart is not an AOT snapshot, it cannot be run with 'dartaotruntime'
+[custom_lint] 2025-09-29T18:46:50.891155
+[custom_lint] 2025-09-29T18:46:50.891155
+Failed to start pluginsThe request analysis.setContextRoots failed with the following error:
+RequestErrorCode.PLUGIN_ERROR
+Bad state: Failed to start the plugins.
+at:
+#0      SocketCustomLintServerToClientChannel._checkInitializationFail.<anonymous closure> (package:custom_lint/src/v2/server_to_client_channel.dart:223)
+<asynchronous suspension>
+#1      Future.any.onValue (dart:async/future.dart:616)
+<asynchronous suspension>
+
+[custom_lint] 2025-09-29T18:46:52.057993 Loading dynamic library failed: not a Mach-O shared object
+[custom_lint] 2025-09-29T18:46:52.057993 lib/custom_lint_client.dart is not an AOT snapshot, it cannot be run with 'dartaotruntime'
+[custom_lint] 2025-09-29T18:46:52.057993
+[custom_lint] 2025-09-29T18:46:52.057993
+Failed to start pluginsThe request analysis.setContextRoots failed with the following error:
+RequestErrorCode.PLUGIN_ERROR
+Bad state: Failed to start the plugins.
+at:
+#0      SocketCustomLintServerToClientChannel._checkInitializationFail.<anonymous closure> (package:custom_lint/src/v2/server_to_client_channel.dart:223)
+<asynchronous suspension>
+#1      Future.any.onValue (dart:async/future.dart:616)
+<asynchronous suspension>
+

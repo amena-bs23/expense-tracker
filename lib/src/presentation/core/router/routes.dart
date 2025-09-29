@@ -12,6 +12,7 @@ class Routes {
   static const String home = '/home';
   static const String profile = '/profile';
   static const String category = '/category';
+  static const String addCategory = '/add-category';
   static const String expenseList = '/expense-list';
   static const String addNewExpense = '/add-new-expense';
   static const String analytics = '/analytics';

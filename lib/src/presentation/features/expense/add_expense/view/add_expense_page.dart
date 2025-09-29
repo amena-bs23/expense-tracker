@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../core/extensions/app_localization.dart';
-import '../../../../core/application_state/logout_provider/logout_provider.dart';
-import '../../../../core/router/routes.dart';
-import '../../../../core/widgets/loading_indicator.dart';
 import '../../../category/riverpod/category_provider.dart';
 import '../../riverpod/expense_provider.dart';
 import '../../../../../../src/domain/entities/expense_entity.dart';
@@ -25,14 +21,10 @@ class _AddExpensePageState extends ConsumerState<AddExpensePage> {
   @override
   void initState() {
     super.initState();
-    ref.listenManual(logoutProvider, (previous, next) {
-      if (next.isSuccess) context.pushReplacementNamed(Routes.login);
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(logoutProvider);
     final categories = ref.watch(categoryProvider).items;
 
     final amountCtrl = TextEditingController();
@@ -131,7 +123,7 @@ class _AddExpensePageState extends ConsumerState<AddExpensePage> {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(content: Text('Expense added')),
                                 );
-                                Navigator.pop(context);
+                                context.go('/expense-list');
                               }
                             },
                       icon: loading
@@ -143,7 +135,7 @@ class _AddExpensePageState extends ConsumerState<AddExpensePage> {
                   const SizedBox(width: 12),
                   Expanded(
                     child: OutlinedButton.icon(
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: () => context.go('/expense-list'),
                       icon: const Icon(Icons.close),
                       label: const Text('Cancel'),
                     ),

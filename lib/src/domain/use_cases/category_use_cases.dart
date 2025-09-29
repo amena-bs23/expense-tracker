@@ -39,3 +39,4 @@ class RestoreCategoriesUseCase {
   final CategoryRepository repository;
   Future<void> call(List<CategoryEntity> items) => repository.restore(items);
 }
+

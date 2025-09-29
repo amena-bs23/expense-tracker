@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/extensions/validation.dart';
-import '../../../../core/utiliity/validation/validation.dart';
-import '../../../../domain/entities/category_entity.dart';
-import '../../../core/widgets/validated_text_field.dart';
-import '../riverpod/category_provider.dart';
+import '../../../../../core/extensions/validation.dart';
+import '../../../../../core/utiliity/validation/validation.dart';
+import '../../../../../domain/entities/category_entity.dart';
+import '../../../../core/widgets/validated_text_field.dart';
+import '../../riverpod/category_provider.dart';
 
 Future<void> showCategoryDialog(
   BuildContext context,
@@ -25,7 +25,7 @@ Future<void> showCategoryDialog(
 
   await showDialog(
     context: context,
-    builder: (_) => AlertDialog(
+    builder: (dialogContext) => AlertDialog(
       title: Text(data == null ? 'Add Category' : 'Edit Category'),
       content: Column(
         mainAxisSize: MainAxisSize.min,
@@ -58,7 +58,6 @@ Future<void> showCategoryDialog(
           DropdownButton<int>(
             value: palette.contains(color.value) ? color.value : palette.first,
 
-
             items: const [
               DropdownMenuItem(value: 0xFF90CAF9, child: Text('Blue')),
               DropdownMenuItem(value: 0xFFFFAB91, child: Text('Deep Orange')),
@@ -72,7 +71,7 @@ Future<void> showCategoryDialog(
       ),
       actions: [
         TextButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Navigator.of(dialogContext).pop(),
           child: const Text('Cancel'),
         ),
         FilledButton(
@@ -88,7 +87,8 @@ Future<void> showCategoryDialog(
             } else {
               await ref.read(categoryProvider.notifier).edit(entity);
             }
-            if (context.mounted) Navigator.pop(context);
+            // if (context.mounted) Navigator.pop(context);
+            if (context.mounted) Navigator.of(dialogContext).pop();
           },
           child: const Text('Save'),
         ),

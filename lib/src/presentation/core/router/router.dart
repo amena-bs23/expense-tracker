@@ -5,6 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../core/extensions/riverpod_extensions.dart';
 import '../../../core/logger/log.dart';
+import '../../features/analytics/view/analytics_page.dart';
 import '../../features/authentication/forgot_password/view/create_new_password_page.dart';
 import '../../features/authentication/forgot_password/view/email_verification_page.dart';
 import '../../features/authentication/forgot_password/view/reset_password_page.dart';
@@ -12,11 +13,10 @@ import '../../features/authentication/forgot_password/view/reset_password_succes
 import '../../features/authentication/login/view/login_page.dart';
 import '../../features/authentication/registration/view/registration_page.dart';
 // Removed unused home/profile pages in shell
-import '../../features/category/view/category_list_page.dart';
-import '../../features/expense/expense_list/view/expense_list_page.dart';
-import '../../features/analytics/view/analytics_page.dart';
+import '../../features/category/add_category/view/add_category_page.dart';
+import '../../features/category/category_list/view/category_list_page.dart';
 import '../../features/expense/add_expense/view/add_expense_page.dart';
-
+import '../../features/expense/expense_list/view/expense_list_page.dart';
 import '../../features/splash/view/splash_page.dart';
 import '../widgets/app_startup/startup_widget.dart';
 import '../widgets/navigation_shell.dart';
@@ -59,7 +59,14 @@ GoRouter goRouter(Ref ref) {
       GoRoute(
         path: Routes.addNewExpense,
         name: Routes.addNewExpense,
-        pageBuilder: (context, state) => const MaterialPage(child: AddExpensePage()),
+        pageBuilder: (context, state) =>
+            const MaterialPage(child: AddExpensePage()),
+      ),
+      GoRoute(
+        path: Routes.addCategory,
+        name: Routes.addCategory,
+        pageBuilder: (context, state) =>
+            const MaterialPage(child: AddCategoryPage()),
       ),
       ..._authenticationRoutes(ref),
       // Category route is handled inside the shell branches

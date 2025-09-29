@@ -6,7 +6,7 @@ import '../../../../core/extensions/app_localization.dart';
 import '../../../core/application_state/logout_provider/logout_provider.dart';
 import '../../../core/router/routes.dart';
 import '../../../core/widgets/loading_indicator.dart';
-import '../../category/view/category_list_page.dart';
+import '../../category/category_list/view/category_list_page.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});

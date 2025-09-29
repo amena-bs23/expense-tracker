@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-
 class NavigationShell extends StatefulWidget {
   const NavigationShell({super.key, required this.statefulNavigationShell});
 
@@ -19,7 +18,11 @@ class _NavigationShellState extends State<NavigationShell> {
         title: const Text('Expense Tracker'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.logout),
+            icon: const Icon(
+              Icons.logout_rounded,
+              color: Colors.grey,
+              size: 32,
+            ),
             onPressed: () {
               context.go('/login');
             },
@@ -34,9 +37,15 @@ class _NavigationShellState extends State<NavigationShell> {
           widget.statefulNavigationShell.goBranch(index);
         },
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.category), label: 'Category'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.category),
+            label: 'Category',
+          ),
           BottomNavigationBarItem(icon: Icon(Icons.list_alt), label: 'Expense'),
-          BottomNavigationBarItem(icon: Icon(Icons.analytics), label: 'Analytics'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.analytics),
+            label: 'Analytics',
+          ),
         ],
       ),
     );

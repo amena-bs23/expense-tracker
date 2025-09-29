@@ -19,3 +19,4 @@ class CategoryModel extends CategoryEntity {
     color: row['color'] as int,
   );
 }
+
